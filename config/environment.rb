@@ -1,11 +1,11 @@
-require 'bundler/setup'
-require 'hanami/setup'
-require 'hanami/model'
-require_relative '../lib/hanami_diary'
-require_relative '../apps/web/application'
+require "bundler/setup"
+require "hanami/setup"
+require "hanami/model"
+require_relative "../lib/hanami_diary"
+require_relative "../apps/web/application"
 
 Hanami.configure do
-  mount Web::Application, at: '/'
+  mount Web::Application, at: "/"
 
   model do
     ##
@@ -18,20 +18,13 @@ Hanami.configure do
     #    adapter :sql, 'postgresql://localhost/hanami_diary_development'
     #    adapter :sql, 'mysql://localhost/hanami_diary_development'
     #
-    adapter :sql, ENV.fetch('DATABASE_URL')
+    adapter :sql, ENV.fetch("DATABASE_URL")
 
     ##
     # Migrations
     #
-    migrations 'db/migrations'
-    schema     'db/schema.sql'
-  end
-
-  mailer do
-    root 'lib/hanami_diary/mailers'
-
-    # See https://guides.hanamirb.org/mailers/delivery
-    delivery :test
+    migrations "db/migrations"
+    schema "db/schema.sql"
   end
 
   environment :development do
@@ -41,9 +34,5 @@ Hanami.configure do
 
   environment :production do
     logger level: :info, formatter: :json, filter: []
-
-    mailer do
-      delivery :smtp, address: ENV.fetch('SMTP_HOST'), port: ENV.fetch('SMTP_PORT')
-    end
   end
 end
