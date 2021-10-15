@@ -1,5 +1,5 @@
-require 'hanami/helpers'
-require 'hanami/assets'
+require "hanami/helpers"
+require "hanami/assets"
 
 module Web
   class Application < Hanami::Application
@@ -19,8 +19,7 @@ module Web
       # When you add new directories, remember to add them here.
       #
       load_paths << [
-        'controllers',
-        'views'
+        "controllers",
       ]
 
       # Handle exceptions with HTTP statuses (true) or don't catch them (false).
@@ -36,7 +35,7 @@ module Web
       # Routes definitions for this application
       # See: http://www.rubydoc.info/gems/hanami-router#Usage
       #
-      routes 'config/routes'
+      routes "config/routes"
 
       # URI scheme used by the routing system to generate absolute URLs
       # Defaults to "http"
@@ -107,45 +106,45 @@ module Web
 
       # The relative path to templates
       #
-      templates 'templates'
+      #templates 'templates'
 
       ##
       # ASSETS
       #
-      assets do
-        # JavaScript compressor
-        #
-        # Supported engines:
-        #
-        #   * :builtin
-        #   * :uglifier
-        #   * :yui
-        #   * :closure
-        #
-        # See: https://guides.hanamirb.org/assets/compressors
-        #
-        # In order to skip JavaScript compression comment the following line
-        javascript_compressor :builtin
+      # assets do
+      #   # JavaScript compressor
+      #   #
+      #   # Supported engines:
+      #   #
+      #   #   * :builtin
+      #   #   * :uglifier
+      #   #   * :yui
+      #   #   * :closure
+      #   #
+      #   # See: https://guides.hanamirb.org/assets/compressors
+      #   #
+      #   # In order to skip JavaScript compression comment the following line
+      #   javascript_compressor :builtin
 
-        # Stylesheet compressor
-        #
-        # Supported engines:
-        #
-        #   * :builtin
-        #   * :yui
-        #   * :sass
-        #
-        # See: https://guides.hanamirb.org/assets/compressors
-        #
-        # In order to skip stylesheet compression comment the following line
-        stylesheet_compressor :builtin
+      #   # Stylesheet compressor
+      #   #
+      #   # Supported engines:
+      #   #
+      #   #   * :builtin
+      #   #   * :yui
+      #   #   * :sass
+      #   #
+      #   # See: https://guides.hanamirb.org/assets/compressors
+      #   #
+      #   # In order to skip stylesheet compression comment the following line
+      #   stylesheet_compressor :builtin
 
-        # Specify sources for assets
-        #
-        sources << [
-          'assets'
-        ]
-      end
+      #   # Specify sources for assets
+      #   #
+      #   sources << [
+      #     "assets",
+      #   ]
+      # end
 
       ##
       # SECURITY
@@ -162,7 +161,7 @@ module Web
       #   * https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options
       #   * https://www.owasp.org/index.php/Clickjacking
       #
-      security.x_frame_options 'DENY'
+      security.x_frame_options "DENY"
 
       # X-Content-Type-Options prevents browsers from interpreting files as
       # something else than declared by the content type in the HTTP headers.
@@ -173,7 +172,7 @@ module Web
       #   * https://msdn.microsoft.com/en-us/library/gg622941%28v=vs.85%29.aspx
       #   * https://blogs.msdn.microsoft.com/ie/2008/09/02/ie8-security-part-vi-beta-2-update
       #
-      security.x_content_type_options 'nosniff'
+      security.x_content_type_options "nosniff"
 
       # X-XSS-Protection is a HTTP header to determine the behavior of the
       # browser in case an XSS attack is detected.
@@ -183,7 +182,7 @@ module Web
       #   * https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)
       #   * https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#X-XSS-Protection
       #
-      security.x_xss_protection '1; mode=block'
+      security.x_xss_protection "1; mode=block"
 
       # Content-Security-Policy (CSP) is a HTTP header supported by modern
       # browsers. It determines trusted sources of execution for dynamic
@@ -284,30 +283,30 @@ module Web
       # host   'example.org'
       # port   443
 
-      assets do
-        # Don't compile static assets in production mode (eg. Sass, ES6)
-        #
-        # See: http://www.rubydoc.info/gems/hanami-assets#Configuration
-        compile false
+      # assets do
+      #   # Don't compile static assets in production mode (eg. Sass, ES6)
+      #   #
+      #   # See: http://www.rubydoc.info/gems/hanami-assets#Configuration
+      #   compile false
 
-        # Use fingerprint file name for asset paths
-        #
-        # See: https://guides.hanamirb.org/assets/overview
-        fingerprint true
+      #   # Use fingerprint file name for asset paths
+      #   #
+      #   # See: https://guides.hanamirb.org/assets/overview
+      #   fingerprint true
 
-        # Content Delivery Network (CDN)
-        #
-        # See: https://guides.hanamirb.org/assets/content-delivery-network
-        #
-        # scheme 'https'
-        # host   'cdn.example.org'
-        # port   443
+      #   # Content Delivery Network (CDN)
+      #   #
+      #   # See: https://guides.hanamirb.org/assets/content-delivery-network
+      #   #
+      #   # scheme 'https'
+      #   # host   'cdn.example.org'
+      #   # port   443
 
-        # Subresource Integrity
-        #
-        # See: https://guides.hanamirb.org/assets/content-delivery-network/#subresource-integrity
-        subresource_integrity :sha256
-      end
+      #   # Subresource Integrity
+      #   #
+      #   # See: https://guides.hanamirb.org/assets/content-delivery-network/#subresource-integrity
+      #   subresource_integrity :sha256
+      # end
     end
   end
 end
