@@ -17,9 +17,9 @@ module Web
           title = params[:title]
           body = params[:body]
 
-          EntryRepository.new.create(date: date, title: title, body: body)
+          created = EntryRepository.new.create(date: date, title: title, body: body)
 
-          self.body = JSON.dump({ id: 1, date: date, title: title, body: body })
+          self.body = JSON.dump(created.to_hash)
           self.headers.merge!({ "Location" => routes.entry_url(id: 1) })
           self.status = 201
         end
