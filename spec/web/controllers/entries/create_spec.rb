@@ -26,11 +26,12 @@ RSpec.describe Web::Controllers::Entries::Create, type: :action do
     it "returns created entry" do
       response = action.call(params)
 
-      created = JSON.load(response[2][0])
-      expect(created["id"]).to_not be_nil
-      expect(created["date"]).to eq(params.dig(:date))
-      expect(created["title"]).to eq(params.dig(:title))
-      expect(created["body"]).to eq(params.dig(:body))
+      res_body = JSON.load(response[2][0])
+      created = repository.last
+      expect(res_body["id"]).to eq(created.id)
+      expect(res_body["date"]).to eq(created.date.iso8601)
+      expect(res_body["title"]).to eq(created.title)
+      expect(res_body["body"]).to eq(created.body)
     end
 
     it "returns the URL of the created entry via Location header" do
