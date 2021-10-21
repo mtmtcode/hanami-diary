@@ -5,13 +5,17 @@ module Web
         include Web::Action
 
         params do
-          required(:date).filled(:str?, format?: /\A\d{4}-\d{2}-\d{2}\z/)
-          optional(:title).filled
+          required(:date).filled(:date?)
+          optional(:title).filled(:str?)
           required(:body).filled(:str?)
         end
 
         def call(params)
-          halt(422) unless params.valid?
+          unless params.valid?
+            self.body = JSON.dump(params.error_messages)
+            self.status = 422
+            return
+          end
 
           date = params[:date]
           title = params[:title]
