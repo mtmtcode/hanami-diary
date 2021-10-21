@@ -45,7 +45,6 @@ RSpec.describe Web::Controllers::Entries::Index, type: :action do
         date = begin_ + i
         repository.create(date: date, body: "test entry")
       end
-
       response = action.call(params)
 
       results = JSON.load(response[2][0])
@@ -74,6 +73,39 @@ RSpec.describe Web::Controllers::Entries::Index, type: :action do
       expect(results.length).to eq(2)
       expect(results.first["date"]).to eq("2021-10-31")
       expect(results.last["date"]).to eq("2021-10-01")
+    end
+  end
+
+  context "with only year specified" do
+    let(:params) { Hash[year: 2021] }
+
+    it "returns 422" do
+      response = action.call(params)
+      expect(response[0]).to eq(422)
+    end
+  end
+
+  context "with only month specified" do
+    let(:params) { Hash[month: 12] }
+    it "returns 422" do
+      response = action.call(params)
+      expect(response[0]).to eq(422)
+    end
+  end
+
+  context "with invalid year" do
+    let(:params) { Hash[year: "a", month: 12] }
+    it "returns 422" do
+      response = action.call(params)
+      expect(response[0]).to eq(422)
+    end
+  end
+
+  context "with invalid month" do
+    let(:params) { Hash[year: 2021, month: 13] }
+    it "returns 422" do
+      response = action.call(params)
+      expect(response[0]).to eq(422)
     end
   end
 

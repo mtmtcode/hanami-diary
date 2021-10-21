@@ -12,6 +12,10 @@ module Web
           optional(:page).filled(:int?, gteq?: 1)
           optional(:year).filled(:int?)
           optional(:month).filled(:int?)
+
+          rule(valid_date: [:year, :month]) do |year, month|
+            (year.none? & month.none?) | (year.type?(Integer) & month.type?(Integer) & month.gteq?(1) & month.lteq?(12))
+          end
         end
 
         def call(params)
