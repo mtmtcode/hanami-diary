@@ -47,10 +47,5 @@ RSpec.describe Web::Controllers::Entries::Create, type: :action do
       response = action.call(params)
       expect(response[0]).to eq 422
     end
-
-    it "sets params to validation errors" do
-      action.call(params)
-      expect(action.params.errors).to_not be_nil
-    end
   end
 end
