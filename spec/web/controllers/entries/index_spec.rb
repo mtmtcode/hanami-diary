@@ -76,4 +76,13 @@ RSpec.describe Web::Controllers::Entries::Index, type: :action do
       expect(results.last["date"]).to eq("2021-10-01")
     end
   end
+
+  context "with invalid page" do
+    let(:params) { Hash[page: 0] }
+
+    it "returns 422" do
+      response = action.call(params)
+      expect(response[0]).to eq(422)
+    end
+  end
 end

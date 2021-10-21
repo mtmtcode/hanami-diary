@@ -8,7 +8,19 @@ module Web
 
         PAGE_LIMIT = 50
 
+        params do
+          optional(:page).filled(:int?, gteq?: 1)
+          optional(:year).filled(:int?)
+          optional(:month).filled(:int?)
+        end
+
         def call(params)
+          unless params.valid?
+            self.body = JSON.dump(params.error_messages)
+            self.status = 422
+            return
+          end
+
           limit = PAGE_LIMIT
           page = params[:page] || 1
           if params[:year] && params[:month]
